@@ -22,11 +22,11 @@ public class JmsConfig {
 	@Value("${spring.activemq.broker-url}")
 	private String brokerUrl;
 
-	@Value("${spring.activemq.user}")
-	private String user;
-
 	@Value("${spring.activemq.password}")
 	private String password;
+
+	@Value("${spring.activemq.user}")
+	private String user;
 
 	@Bean
 	public ActiveMQConnectionFactory connectionFactory() {

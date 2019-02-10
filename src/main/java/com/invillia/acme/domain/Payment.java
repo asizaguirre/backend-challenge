@@ -6,9 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -16,106 +15,74 @@ import io.swagger.annotations.ApiModelProperty;
 @Table(name = "TB_PAYMENT")
 public class Payment {
 
+	private String creditCardNumber;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@ApiModelProperty()
-	private Long id;
-	
-	@OneToOne
-	@PrimaryKeyJoinColumn
-	private OrderItem orderItem;
-	
-	private String status;
-	private String creditCardNumber;
+	private Integer id;
+
 	private Date paymentDate;
+	private String status;
+	@Transient
+	private Integer orderItemId;
+
+	public Integer getOrderItemId() {
+		return orderItemId;
+	}
+
+	public void setOrderItemId(Integer orderItemId) {
+		this.orderItemId = orderItemId;
+	}
 
 	public Payment() {
 		// TODO Auto-generated constructor stub
+		super();
 	}
 
-	/**
-	 * @return the orderItem
-	 */
-	public OrderItem getOrderItem() {
-		return orderItem;
-	}
-
-	/**
-	 * @param orderItem the orderItem to set
-	 */
-	public void setOrderItem(OrderItem orderItem) {
-		this.orderItem = orderItem;
-	}
-
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
-	}
-
-	/**
-	 * @param status the status to set
-	 */
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	/**
-	 * @return the creditCardNumber
-	 */
 	public String getCreditCardNumber() {
 		return creditCardNumber;
 	}
 
-	/**
-	 * @param creditCardNumber the creditCardNumber to set
-	 */
 	public void setCreditCardNumber(String creditCardNumber) {
 		this.creditCardNumber = creditCardNumber;
 	}
 
-	/**
-	 * @return the paymentDate
-	 */
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public Date getPaymentDate() {
 		return paymentDate;
 	}
 
-	/**
-	 * @param paymentDate the paymentDate to set
-	 */
 	public void setPaymentDate(Date paymentDate) {
 		this.paymentDate = paymentDate;
 	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Payment [id=" + id + ", orderItem=" + orderItem + ", status=" + status + ", creditCardNumber="
-				+ creditCardNumber + ", paymentDate=" + paymentDate + "]";
+
+	public String getStatus() {
+		return status;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((creditCardNumber == null) ? 0 : creditCardNumber.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((orderItem == null) ? 0 : orderItem.hashCode());
 		result = prime * result + ((paymentDate == null) ? 0 : paymentDate.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -135,11 +102,6 @@ public class Payment {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (orderItem == null) {
-			if (other.orderItem != null)
-				return false;
-		} else if (!orderItem.equals(other.orderItem))
-			return false;
 		if (paymentDate == null) {
 			if (other.paymentDate != null)
 				return false;
@@ -153,5 +115,10 @@ public class Payment {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Payment [creditCardNumber=" + creditCardNumber + ", id=" + id + ", paymentDate=" + paymentDate
+				+ ", status=" + status + "]";
+	}
 
 }

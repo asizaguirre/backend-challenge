@@ -6,6 +6,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import com.invillia.acme.domain.Payment;
 
 @RepositoryRestResource
-public interface PaymentRepository extends CrudRepository<Payment, Integer>{
+public interface PaymentRepository extends CrudRepository<Payment, Integer> {
 
 }

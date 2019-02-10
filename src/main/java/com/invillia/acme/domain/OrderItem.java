@@ -1,12 +1,9 @@
 package com.invillia.acme.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -15,131 +12,81 @@ import io.swagger.annotations.ApiModelProperty;
 @Table(name = "TB_ORDER_ITEM")
 public class OrderItem {
 
+	private String description;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@ApiModelProperty()
-	private Long id;
-	private String description;
-	private Double unitPrice;
+	private Integer id;
+	@ApiModelProperty(notes = "Endereco da pessoa")
 	private Integer quantity;
-	@OneToOne
-	@PrimaryKeyJoinColumn
-	private Order order;
+	@ApiModelProperty(notes = "Endereco da pessoa")
+	private Double unitPrice;
 
-	@OneToOne(mappedBy = "orderItem", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Payment payment;
+	@ApiModelProperty(notes = "Endereco da pessoa")
+	private Integer orderId;
 
 	public OrderItem() {
 		// TODO Auto-generated constructor stub
-
+		super();
 	}
 
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
+//	public OrderItem(Integer id2, OrderItemDTO oi) {
+//		// TODO Auto-generated constructor stub
+//		this.orderId = id2;
+//		this.description = oi.getDesciption() == null ? "" : oi.getDesciption();
+//		this.quantity = oi.getQuantity() == null ? null : oi.getQuantity();
+//		this.unitPrice = oi.getUnitPrice() == null ? null : oi.getUnitPrice();
+//	}
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the description
-	 */
 	public String getDescription() {
 		return description;
 	}
 
-	/**
-	 * @param description the description to set
-	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	/**
-	 * @return the unitPrice
-	 */
-	public Double getUnitPrice() {
-		return unitPrice;
+	public Integer getId() {
+		return id;
 	}
 
-	/**
-	 * @param unitPrice the unitPrice to set
-	 */
-	public void setUnitPrice(Double unitPrice) {
-		this.unitPrice = unitPrice;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	/**
-	 * @return the quantity
-	 */
 	public Integer getQuantity() {
 		return quantity;
 	}
 
-	/**
-	 * @param quantity the quantity to set
-	 */
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
-	/**
-	 * @return the order
-	 */
-	public Order getOrder() {
-		return order;
+	public Double getUnitPrice() {
+		return unitPrice;
 	}
 
-	/**
-	 * @param order the order to set
-	 */
-	public void setOrder(Order order) {
-		this.order = order;
-	}
-
-	/**
-	 * @param id
-	 * @param description
-	 * @param unitPrice
-	 * @param quantity
-	 * @param order
-	 * @param payment
-	 */
-	public OrderItem(Long id, String description, Double unitPrice, Integer quantity, Order order, Payment payment) {
-		this.id = id;
-		this.description = description;
+	public void setUnitPrice(Double unitPrice) {
 		this.unitPrice = unitPrice;
-		this.quantity = quantity;
-		this.order = order;
-		this.payment = payment;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
+	@Override
+	public String toString() {
+		return "OrderItem [description=" + description + ", id=" + id + ", quantity=" + quantity + ", unitPrice="
+				+ unitPrice + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((order == null) ? 0 : order.hashCode());
-		result = prime * result + ((payment == null) ? 0 : payment.hashCode());
 		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		result = prime * result + ((unitPrice == null) ? 0 : unitPrice.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -159,16 +106,6 @@ public class OrderItem {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (order == null) {
-			if (other.order != null)
-				return false;
-		} else if (!order.equals(other.order))
-			return false;
-		if (payment == null) {
-			if (other.payment != null)
-				return false;
-		} else if (!payment.equals(other.payment))
-			return false;
 		if (quantity == null) {
 			if (other.quantity != null)
 				return false;
@@ -182,13 +119,12 @@ public class OrderItem {
 		return true;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "OrderItem [id=" + id + ", description=" + description + ", unitPrice=" + unitPrice + ", quantity="
-				+ quantity + ", order=" + order + ", payment=" + payment + "]";
+	public Integer getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
 	}
 
 }

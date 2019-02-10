@@ -3,11 +3,11 @@ package com.invillia.acme.services;
 import java.util.List;
 
 public interface CRUDService<T> {
-	List<?> listAll();
+	void delete(Integer id);
 
 	T getById(Integer id);
 
-	T saveOrUpdate(T domainObject);
+	List<?> listAll();
 
-	void delete(Integer id);
+	T saveOrUpdate(T domainObject);
 }
